@@ -4,12 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.micronaut.configuration.kafka.annotation.KafkaKey
 import io.micronaut.configuration.kafka.annotation.KafkaListener
+import io.micronaut.configuration.kafka.annotation.OffsetReset
 import io.micronaut.configuration.kafka.annotation.Topic
 import io.reactivex.Single
 import org.slf4j.LoggerFactory
 import java.lang.invoke.MethodHandles
 
-@KafkaListener(groupId = "reservations")
+@KafkaListener(groupId = "reservations", offsetReset =  OffsetReset.EARLIEST, threads = 10)
 class ReservationListener {
 
     private val log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass())

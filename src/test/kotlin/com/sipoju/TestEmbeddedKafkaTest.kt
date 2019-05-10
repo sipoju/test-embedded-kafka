@@ -16,14 +16,13 @@ class TestEmbeddedKafkaTest {
                 AbstractKafkaConfiguration.EMBEDDED_TOPICS to "reservation"
         ))
 
-        Thread.sleep(4000)
         val producer = applicationContext.getBean(TestProducer::class.java)
         val listener =  applicationContext.getBean(ReservationListener::class.java)
 
         val reservation = Reservation("1", "Reservation")
-        producer.sendReservations("1", reservation)
+        producer.sendReservations(reservation.id, reservation)
 
-        await().atMost(5, TimeUnit.SECONDS).untilAsserted { assert(listener.data == reservation) }
+        await().atMost(10, TimeUnit.SECONDS).until { listener.data == reservation }
     }
 
 }
