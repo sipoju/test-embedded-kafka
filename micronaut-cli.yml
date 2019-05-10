@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.sipoju
+---
+testFramework: spek
+sourceLanguage: kotlin

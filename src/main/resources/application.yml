@@ -1,0 +1,15 @@
+---
+micronaut:
+    application:
+        name: test-embedded-kafka
+
+---
+kafka:
+    bootstrap:
+        servers: localhost:9092
+    consumers:
+        reservations:
+            key:
+                deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+                deserializer: com.sipoju.JsonNodeDeserializer
